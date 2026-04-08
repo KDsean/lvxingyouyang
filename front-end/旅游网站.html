@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>旅行有样 - 探索未知的世界</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto+Sans+SC', sans-serif; }
+        .bg-trip-gradient {
+            background: linear-gradient(90deg, #ff506c 0%, #ff6bc6 100%);
+        }
+        .nav-card:hover { transform: translateY(-2px); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+<!-- 顶部导航栏 -->
+<nav class="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
+<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="iconify text-blue-600 text-3xl" data-icon="ri:pangea-fill"></span>
+<span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">旅行有样</span>
+</div>
+<div class="hidden md:flex space-x-8 font-medium">
+<a class="text-blue-600 border-b-2 border-blue-600 pb-1" href="#">首页</a>
+<a class="hover:text-blue-600 transition" href="#">探索目的地</a>
+<a class="hover:text-blue-600 transition" href="#">特价酒店</a>
+<a class="hover:text-blue-600 transition" href="#">历史规划</a>
+<a class="hover:text-blue-600 transition" href="#">商务合作</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-gray-600 hover:text-blue-600">登录</button>
+<button class="bg-trip-gradient text-white px-6 py-2 rounded-full font-medium hover:opacity-90 transition shadow-lg">立即注册</button>
+</div>
+</div>
+</nav>
+<main class="max-w-[1440px] mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
+<!-- 左侧导航侧边栏 -->
+<aside class="w-full lg:w-72 shrink-0">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 sticky top-24">
+<h3 class="text-lg font-bold mb-6 flex items-center">
+<span class="iconify mr-2 text-blue-600" data-icon="material-symbols:explore"></span>
+                    出行服务
+                </h3>
+<div class="grid grid-cols-2 gap-4">
+<a class="nav-card flex flex-col items-center p-3 rounded-xl bg-blue-50 text-blue-700" href="#">
+<span class="iconify text-2xl mb-1" data-icon="ic:baseline-hotel"></span>
+<span class="text-sm font-medium">酒店住宿</span>
+</a>
+<a class="nav-card flex flex-col items-center p-3 rounded-xl bg-indigo-50 text-indigo-700" href="#">
+<span class="iconify text-2xl mb-1" data-icon="material-symbols:flight"></span>
+<span class="text-sm font-medium">机票预订</span>
+</a>
+<a class="nav-card flex flex-col items-center p-3 rounded-xl bg-purple-50 text-purple-700" href="#">
+<span class="iconify text-2xl mb-1" data-icon="material-symbols:train"></span>
+<span class="text-sm font-medium">火车票</span>
+</a>
+<a class="nav-card flex flex-col items-center p-3 rounded-xl bg-green-50 text-green-700" href="#">
+<span class="iconify text-2xl mb-1" data-icon="material-symbols:directions-car"></span>
+<span class="text-sm font-medium">租车自驾</span>
+</a>
+<a class="nav-card flex flex-col items-center p-3 rounded-xl bg-orange-50 text-orange-700" href="#">
+<span class="iconify text-2xl mb-1" data-icon="material-symbols:local-activity"></span>
+<span class="text-sm font-medium">景点门票</span>
+</a>
+<a class="nav-card flex flex-col items-center p-3 rounded-xl bg-red-50 text-red-700" href="#">
+<span class="iconify text-2xl mb-1" data-icon="material-symbols:map"></span>
+<span class="text-sm font-medium">当地攻略</span>
+</a>
+<a class="nav-card flex flex-col items-center p-3 rounded-xl bg-teal-50 text-teal-700" href="#">
+<span class="iconify text-2xl mb-1" data-icon="material-symbols:restaurant"></span>
+<span class="text-sm font-medium">美食林</span>
+</a>
+<a class="nav-card flex flex-col items-center p-3 rounded-xl bg-rose-50 text-rose-700" href="#">
+<span class="iconify text-2xl mb-1" data-icon="material-symbols:shopping-bag"></span>
+<span class="text-sm font-medium">全球购</span>
+</a>
+</div>
+<div class="mt-8 pt-8 border-t border-gray-100">
+<div class="bg-gray-100 rounded-lg p-4 relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-xs text-gray-500 uppercase font-bold tracking-wider">APP 专享特惠</p>
+<p class="text-sm mt-1">首单预订立减 ¥100</p>
+<img alt="App Download QR" class="w-20 h-20 mt-3 border-4 border-white rounded shadow-sm" src="https://modao.cc/agent-py/media/generated_images/2026-03-01/ade8e5ffec7540e7a4f9b55aa4d346a2.jpg"/>
+</div>
+<span class="iconify absolute -bottom-4 -right-4 text-7xl text-gray-200 opacity-50 group-hover:scale-110 transition" data-icon="ri:cellphone-fill"></span>
+</div>
+</div>
+</div>
+</aside>
+<!-- 右侧主体内容 -->
+<div class="flex-1 space-y-12">
+<!-- Hero Section -->
+<section class="relative h-[360px] rounded-3xl overflow-hidden shadow-2xl">
+<img alt="Beautiful landscape of Yunnan" class="w-full h-full object-cover" src="https://modao.cc/agent-py/media/generated_images/2026-03-01/ff61418edb084fd496e2012d52236161.jpg"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-12">
+<div class="text-white">
+<h1 class="text-5xl font-black mb-4 leading-tight">旅行有样，<br/><span class="text-blue-400">定义你的生活方式</span></h1>
+<p class="text-xl opacity-90 mb-8 max-w-lg">2026年首选旅游平台：用最智能的方式，探索最远方的诗意。全球150+国家行程覆盖。</p>
+<div class="flex space-x-4">
+<button class="bg-trip-gradient px-8 py-3 rounded-xl font-bold text-lg hover:shadow-xl transition transform hover:-translate-y-1">立即规划行程</button>
+<button class="bg-white/20 backdrop-blur-md border border-white/30 px-8 py-3 rounded-xl font-bold text-lg hover:bg-white/30 transition">探索目的地</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 预订酒店 (图文) -->
+<section>
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="text-3xl font-bold">精选酒店预订</h2>
+<p class="text-gray-500 mt-2">为您在全球范围内甄选高评分、极具设计感的住宿体验</p>
+</div>
+<a class="text-blue-600 font-medium hover:underline" href="#">查看更多精选酒店 →</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition">
+<div class="relative h-64">
+<img alt="Luxury Resort in Sanya" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://modao.cc/agent/placeholder.svg"/>
+<span class="absolute top-4 left-4 bg-black/50 backdrop-blur text-white px-3 py-1 rounded-lg text-sm">三亚 · 海棠湾</span>
+</div>
+<div class="p-6">
+<h4 class="text-xl font-bold mb-2">三亚天际海景度假酒店</h4>
+<div class="flex items-center text-yellow-500 mb-4">
+<span class="iconify" data-icon="material-symbols:star"></span>
+<span class="iconify" data-icon="material-symbols:star"></span>
+<span class="iconify" data-icon="material-symbols:star"></span>
+<span class="iconify" data-icon="material-symbols:star"></span>
+<span class="iconify" data-icon="material-symbols:star"></span>
+<span class="ml-2 text-gray-500 text-sm">4.9/5 (2,400+ 条评价)</span>
+</div>
+<p class="text-gray-600 mb-6 text-sm leading-relaxed">独拥两公里私人沙滩，2026年全新装修，配备AI全屋智能控制系统，让您的海滨度假充满科技感与舒适度。</p>
+<div class="flex items-center justify-between">
+<div class="text-2xl font-bold text-orange-500">¥1,899<span class="text-sm font-normal text-gray-500"> /晚起</span></div>
+<button class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition">立即预订</button>
+</div>
+</div>
+</div>
+<div class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition">
+<div class="relative h-64">
+<img alt="Modern Hotel in Shanghai" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="https://modao.cc/agent-py/media/generated_images/2026-03-01/5194616f91ac4327b106ec84dbe1e4a1.jpg"/>
+<span class="absolute top-4 left-4 bg-black/50 backdrop-blur text-white px-3 py-1 rounded-lg text-sm">上海 · 外滩</span>
+</div>
+<div class="p-6">
+<h4 class="text-xl font-bold mb-2">外滩W·未来幻影酒店</h4>
+<div class="flex items-center text-yellow-500 mb-4">
+<span class="iconify" data-icon="material-symbols:star"></span>
+<span class="iconify" data-icon="material-symbols:star"></span>
+<span class="iconify" data-icon="material-symbols:star"></span>
+<span class="iconify" data-icon="material-symbols:star"></span>
+<span class="iconify" data-icon="material-symbols:star-half"></span>
+<span class="ml-2 text-gray-500 text-sm">4.8/5 (3,150+ 条评价)</span>
+</div>
+<p class="text-gray-600 mb-6 text-sm leading-relaxed">270度环幕江景房，直击外滩经典，配备米其林三星云端餐厅，是商务精英与潮流达人的不二之选。</p>
+<div class="flex items-center justify-between">
+<div class="text-2xl font-bold text-orange-500">¥2,450<span class="text-sm font-normal text-gray-500"> /晚起</span></div>
+<button class="border border-blue-600 text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-blue-50 transition">了解详情</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI 行程助手 -->
+<section class="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden">
+<div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+<div class="w-full md:w-1/2">
+<div class="inline-block px-4 py-1 rounded-full bg-blue-500/20 border border-blue-500 text-blue-400 text-sm mb-4 tracking-widest uppercase">Smart AI 3.0</div>
+<h2 class="text-3xl font-bold mb-4">AI 行程管家，10秒懂你</h2>
+<p class="text-gray-400 mb-8 leading-relaxed">告诉我们你的预算、喜好和时间。基于 10 亿次旅行数据生成的实时行程，比你自己更懂你。</p>
+<div class="bg-white/10 p-4 rounded-2xl border border-white/10">
+<div class="flex items-center space-x-3 text-sm italic opacity-70 mb-3">
+<span class="iconify" data-icon="material-symbols:chat"></span>
+<span>您可以试着说: "我想在3月去大理住5天，喜欢古镇精品酒店，预算在5000以内..."</span>
+</div>
+<div class="flex gap-2">
+<input class="flex-1 bg-white/5 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition" placeholder="输入您的旅行意向..." type="text"/>
+<button class="bg-blue-600 p-3 rounded-xl hover:bg-blue-700">
+<span class="iconify text-xl" data-icon="material-symbols:send"></span>
+</button>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 flex justify-center">
+<div class="relative">
+<img alt="AI Agent Visualization" class="w-64 h-64 object-contain" src="https://modao.cc/agent-py/media/generated_images/2026-03-01/7fa6a1cd4acd438aaecaef8efca88f6b.jpg"/>
+<div class="absolute -top-4 -right-4 bg-white/10 backdrop-blur-xl p-4 rounded-2xl border border-white/20 animate-bounce">
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-xs font-mono">正在规划旅游路线</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 blur-[100px] rounded-full"></div>
+</section>
+<!-- 旅游地图 -->
+<section>
+<div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 h-[400px] relative">
+<div class="absolute inset-0 grayscale scale-110 opacity-20">
+<img alt="Global Navigation Map" class="w-full h-full object-cover" src="https://modao.cc/agent-py/media/generated_images/2026-03-01/effa99d73c1349ffbff7c98949ee271b.jpg"/>
+</div>
+<div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-12">
+<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+<span class="iconify text-4xl text-blue-600" data-icon="material-symbols:location-on"></span>
+</div>
+<h3 class="text-2xl font-bold mb-4">实时全球目的地热力图</h3>
+<p class="text-gray-500 mb-8 max-w-md">当前有 12,402 位用户正在 52 个目的地旅行。查看哪里人最少，哪里的天气最宜人。</p>
+<button class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition font-bold">查看互动地图</button>
+</div>
+</div>
+</section>
+<!-- 广告轮播图 -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="group relative h-48 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+<img alt="Swiss Mountain Ad" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" src="https://modao.cc/agent-py/media/generated_images/2026-03-01/19d2da5cb5834e4f8ba9e05e015deb76.jpg"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center flex-col text-white">
+<p class="text-xs tracking-widest mb-1 uppercase opacity-80 font-bold">早春特惠</p>
+<h4 class="text-xl font-bold">瑞士滑雪季</h4>
+<div class="mt-2 text-sm bg-white/20 px-3 py-1 rounded-full">了解更多</div>
+</div>
+</div>
+<div class="group relative h-48 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+<img alt="Kyoto Temple Ad" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" src="https://modao.cc/agent-py/media/generated_images/2026-03-01/468892ebe21341a592d6d1c75a0d720a.jpg"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center flex-col text-white">
+<p class="text-xs tracking-widest mb-1 uppercase opacity-80 font-bold">文化之旅</p>
+<h4 class="text-xl font-bold">京都樱花祭</h4>
+<div class="mt-2 text-sm bg-white/20 px-3 py-1 rounded-full">了解更多</div>
+</div>
+</div>
+<div class="group relative h-48 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+<img alt="Thai Beach Ad" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" src="https://modao.cc/agent-py/media/generated_images/2026-03-01/96ca2238e10c4cae9ffeaffefeb0392d.jpg"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center flex-col text-white">
+<p class="text-xs tracking-widest mb-1 uppercase opacity-80 font-bold">限时秒杀</p>
+<h4 class="text-xl font-bold">普吉岛潜水</h4>
+<div class="mt-2 text-sm bg-white/20 px-3 py-1 rounded-full">了解更多</div>
+</div>
+</div>
+</section>
+<!-- 酒店对比表格 -->
+<section>
+<div class="mb-8">
+<h2 class="text-3xl font-bold">酒店等级对比</h2>
+<p class="text-gray-500 mt-2">清晰的标准对比，助您做出最合适的选择</p>
+</div>
+<div class="overflow-hidden rounded-2xl border border-gray-200 shadow-sm">
+<table class="w-full text-left bg-white border-collapse">
+<thead>
+<tr class="bg-gray-50 text-gray-400 text-sm tracking-wider">
+<th class="px-6 py-4 font-bold border-b">维度</th>
+<th class="px-6 py-4 font-bold border-b">超级奢华 (7钻)</th>
+<th class="px-6 py-4 font-bold border-b">五星尊享 (5钻)</th>
+<th class="px-6 py-4 font-bold border-b">舒适优选 (3-4钻)</th>
+<th class="px-6 py-4 font-bold border-b">经济便捷</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<tr>
+<td class="px-6 py-4 font-medium text-gray-900">核心设施</td>
+<td class="px-6 py-4">直升机坪、私人管家、定制香氛</td>
+<td class="px-6 py-4">行政酒廊、大堂咖啡、健身中心</td>
+<td class="px-6 py-4">智能马桶、人体工学办公区</td>
+<td class="px-6 py-4">24H自助入住、共享洗衣</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-medium text-gray-900">增值服务</td>
+<td class="px-6 py-4">专人机场接送(劳斯莱斯)</td>
+<td class="px-6 py-4">下午茶权益、免费加床</td>
+<td class="px-6 py-4">免费瓶装水、行李寄存</td>
+<td class="px-6 py-4">周边导览手册</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-medium text-gray-900">平均均价</td>
+<td class="px-6 py-4"><span class="text-orange-500 font-bold">¥5,000+</span></td>
+<td class="px-6 py-4"><span class="text-gray-800">¥1,200 - 3,500</span></td>
+<td class="px-6 py-4"><span class="text-gray-800">¥400 - 800</span></td>
+<td class="px-6 py-4"><span class="text-gray-800">¥150 - 300</span></td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-medium text-gray-900">退改政策</td>
+<td class="px-6 py-4 flex items-center text-green-600">
+<span class="iconify mr-1" data-icon="material-symbols:check-circle"></span> 随时退
+                                </td>
+<td class="px-6 py-4 flex items-center text-green-600">
+<span class="iconify mr-1" data-icon="material-symbols:check-circle"></span> 入住前1天退
+                                </td>
+<td class="px-6 py-4 flex items-center text-orange-500">
+<span class="iconify mr-1" data-icon="material-symbols:info"></span> 视订单而定
+                                </td>
+<td class="px-6 py-4 flex items-center text-red-500">
+<span class="iconify mr-1" data-icon="material-symbols:cancel"></span> 不可取消
+                                </td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- 页脚 -->
+<footer class="bg-white border-t border-gray-100 mt-20 pt-16 pb-8">
+<div class="max-w-[1440px] mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-12 mb-12">
+<div class="col-span-1 md:col-span-2">
+<div class="flex items-center space-x-2 mb-6">
+<span class="iconify text-blue-600 text-3xl" data-icon="ri:pangea-fill"></span>
+<span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">旅行有样</span>
+</div>
+<p class="text-gray-500 max-w-sm mb-6 leading-relaxed">旅行有样是您 2026 年最可靠的旅行伙伴。我们致力于通过大数据与人工智能技术，为每一位旅行者推荐更具性价比、更有温度、更有“样”的旅行体验。</p>
+<div class="flex space-x-4">
+<a class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-blue-600 transition" href="#">
+<span class="iconify text-xl" data-icon="ri:wechat-fill"></span>
+</a>
+<a class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-blue-600 transition" href="#">
+<span class="iconify text-xl" data-icon="ri:weibo-fill"></span>
+</a>
+<a class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-blue-600 transition" href="#">
+<span class="iconify text-xl" data-icon="ri:douban-fill"></span>
+</a>
+<a class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-blue-600 transition" href="#">
+<span class="iconify text-xl" data-icon="ri:xiaohongshu-fill"></span>
+</a>
+</div>
+</div>
+<div>
+<h5 class="font-bold mb-6">关于我们</h5>
+<ul class="space-y-4 text-gray-500 text-sm">
+<li><a class="hover:text-blue-600" href="#">品牌故事</a></li>
+<li><a class="hover:text-blue-600" href="#">媒体报道</a></li>
+<li><a class="hover:text-blue-600" href="#">加入我们</a></li>
+<li><a class="hover:text-blue-600" href="#">可持续发展</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold mb-6">客户中心</h5>
+<ul class="space-y-4 text-gray-500 text-sm">
+<li><a class="hover:text-blue-600" href="#">开发者 API</a></li>
+<li><a class="hover:text-blue-600" href="#">帮助中心</a></li>
+<li><a class="hover:text-blue-600" href="#">常见问题</a></li>
+<li><a class="hover:text-blue-600" href="#">意见反馈</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold mb-6">快捷链接</h5>
+<ul class="space-y-4 text-gray-500 text-sm">
+<li><a class="hover:text-blue-600" href="#">全站地图</a></li>
+<li><a class="hover:text-blue-600" href="#">特价日报</a></li>
+<li><a class="hover:text-blue-600" href="#">旅游摄影赛</a></li>
+<li><a class="hover:text-blue-600" href="#">签证代理</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold mb-6">联系方式</h5>
+<ul class="space-y-4 text-gray-500 text-sm">
+<li class="flex items-center">
+<span class="iconify mr-2 text-lg" data-icon="material-symbols:phone-in-talk-outline"></span>
+                            195-7485-905
+                        </li>
+<li class="flex items-center">
+<span class="iconify mr-2 text-lg" data-icon="material-symbols:mail-outline"></span>
+                            1971283224@qq.com
+                        </li>
+<li class="flex items-start">
+<span class="iconify mr-2 text-lg mt-1" data-icon="material-symbols:location-on-outline"></span>
+                             广东省湛江市麻章区湖光镇教育城新坡路1号<span>致远楼众创空间</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+<p>© 2026 旅行有样 Inc. 保留所有权利。粤ICP备20260301号</p>
+<div class="flex space-x-6 mt-4 md:mt-0">
+<a class="hover:text-gray-600" href="#">服务条款</a>
+<a class="hover:text-gray-600" href="#">隐私声明</a>
+<a class="hover:text-gray-600" href="#">Cookie 政策</a>
+</div>
+</div>
+</div>
+</footer>
+</body>
+</html>

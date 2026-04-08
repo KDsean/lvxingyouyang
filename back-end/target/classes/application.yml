@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: lvxingyouyang-backend
+  datasource:
+    url: jdbc:mysql://localhost:3306/lvxingyouyang?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+jwt:
+  secret: lvxingyouyang-secret-key-2026-graduation-project-very-long-secret-key
+  expiration: 86400000
+
+logging:
+  level:
+    root: INFO
+    com.lvxingyouyang: DEBUG
+
+# Python LangChain AI 服务地址
+ai:
+  python:
+    url: http://localhost:8001

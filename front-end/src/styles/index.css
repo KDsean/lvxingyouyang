@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-trip-gradient {
+    background: linear-gradient(90deg, #ff506c 0%, #ff6bc6 100%);
+  }
+  
+  .nav-card:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+}
