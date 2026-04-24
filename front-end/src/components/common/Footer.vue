@@ -29,8 +29,8 @@
               </a>
             </el-tooltip>
             <el-tooltip content="小红书: 旅行有样" placement="top">
-              <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-red-500 transition">
-                <span class="iconify text-xl" data-icon="mdi:book-open-page-variant"></span>
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-[#ff2442] transition">
+                <span class="iconify text-xl" data-icon="simple-icons:xiaohongshu"></span>
               </a>
             </el-tooltip>
           </div>

@@ -8,7 +8,7 @@
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
       <div class="relative h-96">
         <img
-          src="https://modao.cc/agent/placeholder.svg"
+          :src="attractionHeroImage"
           alt="Attraction"
           class="w-full h-full object-cover"
         />
@@ -62,8 +62,10 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { getAttractionImage } from '@/utils/businessImages'
 
 const router = useRouter()
+const attractionHeroImage = getAttractionImage({ name: '故宫博物院', city: '北京', type: 'museum' })
 
 const goBack = () => {
   router.back()

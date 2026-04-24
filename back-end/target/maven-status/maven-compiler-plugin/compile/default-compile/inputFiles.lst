@@ -2,6 +2,7 @@ F:\program\graduation project\lvxingyouyang\back-end\src\main\java\com\lvxingyou
 F:\program\graduation project\lvxingyouyang\back-end\src\main\java\com\lvxingyouyang\entity\Attraction.java
 F:\program\graduation project\lvxingyouyang\back-end\src\main\java\com\lvxingyouyang\service\ITripPlanService.java
 F:\program\graduation project\lvxingyouyang\back-end\src\main\java\com\lvxingyouyang\controller\GuideController.java
+F:\program\graduation project\lvxingyouyang\back-end\src\main\java\com\lvxingyouyang\dto\DestinationHeatmapPoint.java
 F:\program\graduation project\lvxingyouyang\back-end\src\main\java\com\lvxingyouyang\dto\LoginRequest.java
 F:\program\graduation project\lvxingyouyang\back-end\src\main\java\com\lvxingyouyang\repository\CarRentalRepository.java
 F:\program\graduation project\lvxingyouyang\back-end\src\main\java\com\lvxingyouyang\repository\UserRepository.java

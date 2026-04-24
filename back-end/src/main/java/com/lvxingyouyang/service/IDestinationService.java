@@ -1,5 +1,6 @@
 package com.lvxingyouyang.service;
 
+import com.lvxingyouyang.dto.DestinationHeatmapPoint;
 import com.lvxingyouyang.dto.PageResponse;
 import com.lvxingyouyang.entity.Destination;
 import java.util.List;
@@ -39,4 +40,10 @@ public interface IDestinationService {
      * @return 搜索结果列表
      */
     List<Destination> searchDestinations(String keyword, String region);
+
+    /**
+     * 获取目的地热力图数据
+     * @return 热力图点位
+     */
+    List<DestinationHeatmapPoint> getDestinationHeatmap();
 }

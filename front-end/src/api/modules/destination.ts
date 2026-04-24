@@ -1,5 +1,5 @@
 import { http } from '../request'
-import type { ApiResponse, PageResponse, Destination } from '@/types'
+import type { ApiResponse, PageResponse, Destination, DestinationHeatmapPoint } from '@/types'
 
 // 获取目的地列表
 export const getDestinations = (params: {
@@ -29,5 +29,5 @@ export const searchDestinations = (params: { keyword?: string; region?: string }
 
 // 获取目的地热力图数据
 export const getDestinationHeatmap = () => {
-  return http.get<ApiResponse<Array<{ destination: string; count: number; lat: number; lng: number }>>>('/destinations/heatmap')
+  return http.get<ApiResponse<DestinationHeatmapPoint[]>>('/destinations/heatmap')
 }

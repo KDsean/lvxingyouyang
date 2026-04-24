@@ -38,6 +38,6 @@ public class DestinationController {
 
     @GetMapping("/heatmap")
     public ApiResponse<?> getDestinationHeatmap() {
-        return ApiResponse.success("热力图数据");
+        return ApiResponse.success(destinationService.getDestinationHeatmap());
     }
 }

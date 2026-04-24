@@ -54,7 +54,7 @@
         >
           <div class="relative h-56 overflow-hidden">
             <img
-              :src="restaurant.images[0]"
+              :src="getRestaurantImage(restaurant)"
               :alt="restaurant.name"
               class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
             />
@@ -116,7 +116,7 @@
         >
           <div class="w-48 h-48 relative overflow-hidden flex-shrink-0">
             <img
-              :src="restaurant.images[0]"
+              :src="getRestaurantImage(restaurant)"
               :alt="restaurant.name"
               class="w-full h-full object-cover hover:scale-110 transition duration-500"
             />
@@ -159,6 +159,7 @@ import { ElMessage } from 'element-plus'
 import type { Restaurant } from '@/types'
 import { searchRestaurants } from '@/api/modules/restaurant'
 import { onMounted } from 'vue'
+import { getRestaurantImage } from '@/utils/businessImages'
 
 const router = useRouter()
 

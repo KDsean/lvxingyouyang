@@ -91,6 +91,18 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '探索目的地' }
       },
       {
+        path: 'destinations/:id',
+        name: 'DestinationDetail',
+        component: () => import('@/views/DestinationDetail.vue'),
+        meta: { title: '目的地详情' }
+      },
+      {
+        path: 'promotions/:slug',
+        name: 'PromotionDetail',
+        component: () => import('@/views/PromotionDetail.vue'),
+        meta: { title: '活动详情' }
+      },
+      {
         path: 'planning',
         name: 'Planning',
         component: () => import('@/views/Planning.vue'),
@@ -133,17 +145,21 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {
       return savedPosition
-    } else {
-      return { top: 0 }
     }
+
+    if (to.hash) {
+      return { el: to.hash, top: 96, behavior: 'smooth' }
+    }
+
+    return { top: 0 }
   }
 })
 
 // 路由守卫
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   // 设置页面标题
   document.title = `${to.meta.title || ''} - 旅行有样`
   

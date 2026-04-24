@@ -53,7 +53,7 @@
               <img 
                 alt="Luxury Resort" 
                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
-                src="https://modao.cc/agent/placeholder.svg"
+                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80"
               />
               <span class="absolute top-4 left-4 bg-black/50 backdrop-blur text-white px-3 py-1 rounded-lg text-sm">
                 三亚 · 海棠湾
@@ -186,14 +186,15 @@
             <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
               <span class="iconify text-4xl text-blue-600" data-icon="material-symbols:location-on"></span>
             </div>
-            <h3 class="text-2xl font-bold mb-4">实时全球目的地热力图</h3>
+            <h3 class="text-2xl font-bold mb-4">实时热门目的地热力图</h3>
             <p class="text-gray-500 mb-8 max-w-md">
-              当前有 12,402 位用户正在 52 个目的地旅行。查看哪里人最少，哪里的天气最宜人。
+              热点正在北京、上海、三亚等热门目的地聚集。点击查看热度分布，并直接进入对应详情页。
             </p>
-            <router-link to="/destinations">
-              <button class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition font-bold">
-                查看互动地图
-              </button>
+            <router-link
+              :to="{ name: 'Destinations', hash: '#heatmap' }"
+              class="inline-flex items-center bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition font-bold"
+            >
+              查看互动地图
             </router-link>
           </div>
         </div>
@@ -201,7 +202,10 @@
 
       <!-- 广告轮播 -->
       <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="group relative h-48 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+        <router-link
+          :to="{ name: 'PromotionDetail', params: { slug: 'swiss-ski-season' } }"
+          class="group relative h-48 rounded-2xl overflow-hidden cursor-pointer shadow-sm"
+        >
           <img 
             alt="Swiss Mountain" 
             class="w-full h-full object-cover group-hover:scale-110 transition duration-700" 
@@ -212,9 +216,12 @@
             <h4 class="text-xl font-bold">瑞士滑雪季</h4>
             <div class="mt-2 text-sm bg-white/20 px-3 py-1 rounded-full">了解更多</div>
           </div>
-        </div>
+        </router-link>
         
-        <div class="group relative h-48 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+        <router-link
+          :to="{ name: 'PromotionDetail', params: { slug: 'kyoto-sakura-festival' } }"
+          class="group relative h-48 rounded-2xl overflow-hidden cursor-pointer shadow-sm"
+        >
           <img 
             alt="Kyoto Temple" 
             class="w-full h-full object-cover group-hover:scale-110 transition duration-700" 
@@ -225,9 +232,12 @@
             <h4 class="text-xl font-bold">京都樱花祭</h4>
             <div class="mt-2 text-sm bg-white/20 px-3 py-1 rounded-full">了解更多</div>
           </div>
-        </div>
+        </router-link>
         
-        <div class="group relative h-48 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+        <router-link
+          :to="{ name: 'PromotionDetail', params: { slug: 'phuket-diving' } }"
+          class="group relative h-48 rounded-2xl overflow-hidden cursor-pointer shadow-sm"
+        >
           <img 
             alt="Thai Beach" 
             class="w-full h-full object-cover group-hover:scale-110 transition duration-700" 
@@ -238,7 +248,7 @@
             <h4 class="text-xl font-bold">普吉岛潜水</h4>
             <div class="mt-2 text-sm bg-white/20 px-3 py-1 rounded-full">了解更多</div>
           </div>
-        </div>
+        </router-link>
       </section>
 
       <!-- 酒店对比表格 -->
@@ -248,52 +258,60 @@
           <p class="text-gray-500 mt-2">清晰的标准对比，助您做出最合适的选择</p>
         </div>
         
-        <div class="overflow-hidden rounded-2xl border border-gray-200 shadow-sm">
-          <table class="w-full text-left bg-white border-collapse">
+        <div class="overflow-x-auto overflow-y-hidden rounded-2xl border border-gray-200 shadow-sm">
+          <table class="w-max min-w-full text-left bg-white border-collapse">
             <thead>
               <tr class="bg-gray-50 text-gray-400 text-sm tracking-wider">
-                <th class="px-6 py-4 font-bold border-b">维度</th>
-                <th class="px-6 py-4 font-bold border-b">超级奢华 (7钻)</th>
-                <th class="px-6 py-4 font-bold border-b">五星尊享 (5钻)</th>
-                <th class="px-6 py-4 font-bold border-b">舒适优选 (3-4钻)</th>
-                <th class="px-6 py-4 font-bold border-b">经济便捷</th>
+                <th class="px-6 py-4 font-bold border-b whitespace-nowrap">维度</th>
+                <th class="px-6 py-4 font-bold border-b whitespace-nowrap">超级奢华 (7钻)</th>
+                <th class="px-6 py-4 font-bold border-b whitespace-nowrap">五星尊享 (5钻)</th>
+                <th class="px-6 py-4 font-bold border-b whitespace-nowrap">舒适优选 (3-4钻)</th>
+                <th class="px-6 py-4 font-bold border-b whitespace-nowrap">经济便捷</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
               <tr>
-                <td class="px-6 py-4 font-medium text-gray-900">核心设施</td>
-                <td class="px-6 py-4">直升机坪、私人管家、定制香氛</td>
-                <td class="px-6 py-4">行政酒廊、大堂咖啡、健身中心</td>
-                <td class="px-6 py-4">智能马桶、人体工学办公区</td>
-                <td class="px-6 py-4">24H自助入住、共享洗衣</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">核心设施</td>
+                <td class="px-6 py-4 whitespace-nowrap">直升机坪、私人管家、定制香氛</td>
+                <td class="px-6 py-4 whitespace-nowrap">行政酒廊、大堂咖啡、健身中心</td>
+                <td class="px-6 py-4 whitespace-nowrap">智能马桶、人体工学办公区</td>
+                <td class="px-6 py-4 whitespace-nowrap">24H自助入住、共享洗衣</td>
               </tr>
               <tr>
-                <td class="px-6 py-4 font-medium text-gray-900">增值服务</td>
-                <td class="px-6 py-4">专人机场接送(劳斯莱斯)</td>
-                <td class="px-6 py-4">下午茶权益、免费加床</td>
-                <td class="px-6 py-4">免费瓶装水、行李寄存</td>
-                <td class="px-6 py-4">周边导览手册</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">增值服务</td>
+                <td class="px-6 py-4 whitespace-nowrap">专人机场接送(劳斯莱斯)</td>
+                <td class="px-6 py-4 whitespace-nowrap">下午茶权益、免费加床</td>
+                <td class="px-6 py-4 whitespace-nowrap">免费瓶装水、行李寄存</td>
+                <td class="px-6 py-4 whitespace-nowrap">周边导览手册</td>
               </tr>
               <tr>
-                <td class="px-6 py-4 font-medium text-gray-900">平均均价</td>
-                <td class="px-6 py-4"><span class="text-orange-500 font-bold">¥5,000+</span></td>
-                <td class="px-6 py-4"><span class="text-gray-800">¥1,200 - 3,500</span></td>
-                <td class="px-6 py-4"><span class="text-gray-800">¥400 - 800</span></td>
-                <td class="px-6 py-4"><span class="text-gray-800">¥150 - 300</span></td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">平均均价</td>
+                <td class="px-6 py-4 whitespace-nowrap"><span class="text-orange-500 font-bold">¥5,000+</span></td>
+                <td class="px-6 py-4 whitespace-nowrap"><span class="text-gray-800">¥1,200 - 3,500</span></td>
+                <td class="px-6 py-4 whitespace-nowrap"><span class="text-gray-800">¥400 - 800</span></td>
+                <td class="px-6 py-4 whitespace-nowrap"><span class="text-gray-800">¥150 - 300</span></td>
               </tr>
               <tr>
-                <td class="px-6 py-4 font-medium text-gray-900">退改政策</td>
-                <td class="px-6 py-4 flex items-center text-green-600">
-                  <span class="iconify mr-1" data-icon="material-symbols:check-circle"></span> 随时退
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">退改政策</td>
+                <td class="px-6 py-4 text-green-600 whitespace-nowrap">
+                  <div class="flex items-center whitespace-nowrap">
+                    <span class="iconify mr-1" data-icon="material-symbols:check-circle"></span> 入住前72小时免费退改
+                  </div>
                 </td>
-                <td class="px-6 py-4 flex items-center text-green-600">
-                  <span class="iconify mr-1" data-icon="material-symbols:check-circle"></span> 入住前1天退
+                <td class="px-6 py-4 text-green-600 whitespace-nowrap">
+                  <div class="flex items-center whitespace-nowrap">
+                    <span class="iconify mr-1" data-icon="material-symbols:check-circle"></span> 入住前48小时免费退改
+                  </div>
                 </td>
-                <td class="px-6 py-4 flex items-center text-orange-500">
-                  <span class="iconify mr-1" data-icon="material-symbols:info"></span> 视订单而定
+                <td class="px-6 py-4 text-orange-500 whitespace-nowrap">
+                  <div class="flex items-center whitespace-nowrap">
+                    <span class="iconify mr-1" data-icon="material-symbols:info"></span> 标准价入住前24小时可退
+                  </div>
                 </td>
-                <td class="px-6 py-4 flex items-center text-red-500">
-                  <span class="iconify mr-1" data-icon="material-symbols:cancel"></span> 不可取消
+                <td class="px-6 py-4 text-orange-500 whitespace-nowrap">
+                  <div class="flex items-center whitespace-nowrap">
+                    <span class="iconify mr-1" data-icon="material-symbols:info"></span> 标准价入住前12小时可退
+                  </div>
                 </td>
               </tr>
             </tbody>

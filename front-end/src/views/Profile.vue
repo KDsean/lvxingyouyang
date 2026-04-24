@@ -15,28 +15,29 @@
                 <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
               </el-upload>
             </el-form-item>
-            
+
             <el-form-item label="用户名">
               <el-input v-model="profileForm.username"></el-input>
             </el-form-item>
-            
+
             <el-form-item label="邮箱">
               <el-input v-model="profileForm.email"></el-input>
             </el-form-item>
-            
+
             <el-form-item label="手机号">
               <el-input v-model="profileForm.phone"></el-input>
             </el-form-item>
-            
+
             <el-form-item>
-              <el-button type="primary" @click="updateProfile">保存修改</el-button>
+              <el-button type="primary" :loading="profileSaving" @click="updateProfile">保存修改</el-button>
             </el-form-item>
           </el-form>
         </div>
       </el-tab-pane>
-      
+
       <el-tab-pane label="我的订单" name="orders">
         <div class="space-y-4">
+          <el-empty v-if="!orders.length" description="暂无订单" />
           <div
             v-for="order in orders"
             :key="order.id"
@@ -51,7 +52,7 @@
                 {{ getOrderStatusText(order.status) }}
               </el-tag>
             </div>
-            
+
             <div class="flex items-center justify-between">
               <div class="text-orange-500 font-bold text-xl">¥{{ order.amount }}</div>
               <div class="text-sm text-gray-500">{{ formatDate(order.createdAt) }}</div>
@@ -59,22 +60,22 @@
           </div>
         </div>
       </el-tab-pane>
-      
+
       <el-tab-pane label="修改密码" name="password">
         <div class="max-w-2xl">
           <el-form :model="passwordForm" label-width="100px">
             <el-form-item label="原密码">
               <el-input v-model="passwordForm.oldPassword" type="password" show-password></el-input>
             </el-form-item>
-            
+
             <el-form-item label="新密码">
               <el-input v-model="passwordForm.newPassword" type="password" show-password></el-input>
             </el-form-item>
-            
+
             <el-form-item label="确认密码">
               <el-input v-model="passwordForm.confirmPassword" type="password" show-password></el-input>
             </el-form-item>
-            
+
             <el-form-item>
               <el-button type="primary" @click="changePassword">修改密码</el-button>
             </el-form-item>
@@ -86,22 +87,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
-import type { Order } from '@/types'
+import type { Order, User } from '@/types'
+import { updateProfile as updateProfileApi } from '@/api/modules/auth'
+import { getMyOrders } from '@/api/modules/user'
+import { useUserStore } from '@/stores/user'
 import { onImageError } from '@/utils/image'
 
 const route = useRoute()
+const userStore = useUserStore()
 
 const activeTab = ref((route.query.tab as string) || 'profile')
+const profileSaving = ref(false)
 
 const profileForm = reactive({
   avatar: '',
-  username: '旅行达人',
-  email: 'user@example.com',
-  phone: '13800138000'
+  username: '',
+  email: '',
+  phone: ''
 })
 
 const passwordForm = reactive({
@@ -110,33 +116,54 @@ const passwordForm = reactive({
   confirmPassword: ''
 })
 
-const orders = ref<Order[]>([
-  {
-    id: 'ORD20260301001',
-    userId: '1',
-    type: 'hotel',
-    itemId: '1',
-    itemName: '三亚天际海景度假酒店',
-    amount: 1899,
-    status: 'paid',
-    createdAt: '2026-02-28T10:00:00',
-    paidAt: '2026-02-28T10:05:00'
-  },
-  {
-    id: 'ORD20260301002',
-    userId: '1',
-    type: 'flight',
-    itemId: '1',
-    itemName: '北京-上海 CA1234',
-    amount: 880,
-    status: 'completed',
-    createdAt: '2026-02-25T14:00:00',
-    paidAt: '2026-02-25T14:05:00'
-  }
-])
+const orders = ref<Order[]>([])
 
-const updateProfile = () => {
-  ElMessage.success('保存成功')
+const fillProfileForm = (user?: User | null) => {
+  profileForm.avatar = user?.avatar || ''
+  profileForm.username = user?.username || ''
+  profileForm.email = user?.email || ''
+  profileForm.phone = user?.phone || ''
+}
+
+const loadProfile = async () => {
+  await userStore.fetchUserInfo()
+  fillProfileForm(userStore.user)
+}
+
+const loadOrders = async () => {
+  try {
+    const res = await getMyOrders({ page: 1, pageSize: 20 })
+    if (res.code === 200 && res.data) {
+      orders.value = res.data.list
+    }
+  } catch (error) {
+    console.error('Load orders error:', error)
+  }
+}
+
+const updateProfile = async () => {
+  if (!profileForm.username.trim() || !profileForm.email.trim()) {
+    ElMessage.warning('用户名和邮箱不能为空')
+    return
+  }
+
+  profileSaving.value = true
+  try {
+    const res = await updateProfileApi({
+      avatar: profileForm.avatar,
+      username: profileForm.username.trim(),
+      email: profileForm.email.trim(),
+      phone: profileForm.phone.trim()
+    })
+
+    if (res.code === 200 && res.data) {
+      userStore.updateUser(res.data)
+      fillProfileForm(res.data)
+      ElMessage.success('保存成功')
+    }
+  } finally {
+    profileSaving.value = false
+  }
 }
 
 const changePassword = () => {
@@ -144,12 +171,12 @@ const changePassword = () => {
     ElMessage.warning('请填写完整信息')
     return
   }
-  
+
   if (passwordForm.newPassword !== passwordForm.confirmPassword) {
     ElMessage.error('两次输入的密码不一致')
     return
   }
-  
+
   ElMessage.success('密码修改成功')
   passwordForm.oldPassword = ''
   passwordForm.newPassword = ''
@@ -179,6 +206,11 @@ const getOrderStatusText = (status: string) => {
 const formatDate = (date: string) => {
   return new Date(date).toLocaleString('zh-CN')
 }
+
+onMounted(async () => {
+  fillProfileForm(userStore.user)
+  await Promise.all([loadProfile(), loadOrders()])
+})
 </script>
 
 <style scoped>

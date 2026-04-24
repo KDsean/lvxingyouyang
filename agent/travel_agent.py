@@ -17,7 +17,7 @@ from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, System
 from langgraph.errors import GraphRecursionError
 from langgraph.prebuilt import create_react_agent, ToolNode
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from airport_codes import get_airport_code
+from airport_codes import get_airport_code, normalize_city_name
 
 load_dotenv()
 
@@ -96,6 +96,18 @@ SYSTEM_PROMPT = """你是「旅行有样」平台的专业 AI 旅行规划师。
 # TravelAgent 类
 # ─────────────────────────────────────────────
 class TravelAgent:
+    _TRAVEL_TOOL_KEYWORDS = (
+        "旅行", "旅游", "行程", "攻略", "路线", "路书", "度假",
+        "景点", "景区", "门票", "酒店", "住宿", "民宿",
+        "餐厅", "美食", "小吃", "地图", "导航",
+        "天气", "气温", "温度", "下雨",
+        "航班", "机票", "机场", "火车", "高铁", "动车", "列车", "车次", "余票", "票价", "车站",
+    )
+    _TRAVEL_FOLLOW_UP_HINTS = (
+        "那", "这个", "那个", "还有", "继续", "顺便", "再查", "查一下", "查查",
+        "多少钱", "几点", "怎么去", "怎么走", "能订", "可以订",
+    )
+
     def __init__(self):
         # 延迟初始化，避免启动时因缺少 API Key 崩溃
         self._llm = None
@@ -199,6 +211,40 @@ class TravelAgent:
             )),
         ]
 
+    def _build_direct_messages(
+        self,
+        message: str,
+        history: list[dict] | None,
+    ) -> list[BaseMessage]:
+        """Build plain LLM messages for non-tool conversations."""
+        return [
+            SystemMessage(content=SYSTEM_PROMPT),
+            *self._build_messages(message, history),
+        ]
+
+    def _looks_travel_related(self, text: str) -> bool:
+        """Heuristic intent check for queries that may need live travel tools."""
+        text = (text or "").strip()
+        if not text:
+            return False
+        return any(keyword in text for keyword in self._TRAVEL_TOOL_KEYWORDS)
+
+    def _should_use_react(self, message: str, history: list[dict] | None) -> bool:
+        """Only send travel-related requests to the ReAct/tool chain."""
+        if self._parse_travel_params(message):
+            return False
+        if self._looks_travel_related(message):
+            return True
+
+        recent_history = "\n".join(
+            self._stringify_content(msg.get("content", ""))
+            for msg in (history or [])[-4:]
+            if msg.get("role") in ("user", "assistant")
+        )
+        message_text = (message or "").strip()
+        is_follow_up = any(hint in message_text for hint in self._TRAVEL_FOLLOW_UP_HINTS)
+        return bool(recent_history and is_follow_up and self._looks_travel_related(recent_history))
+
     async def _stream_llm_response(self, messages: list[BaseMessage]) -> AsyncIterator[str]:
         """Stream plain-text tokens from a direct LLM call."""
         async for chunk in self._get_llm().astream(messages):
@@ -291,16 +337,16 @@ class TravelAgent:
 
         params: dict = {}
 
-        # 出发地 + 目的地 + 天数
-        m = re.search(r'从(.{2,12}?)(?:出发)?(?:到|去)(.{2,12}?)的?(\d+)天', message)
+        # 出发地 + 目的地 + 天数；允许“从杭州出发，去成都”这类中间带标点的表达
+        m = re.search(r'从(.{2,12}?)(?:出发)?[，,。；;\s]*(?:到|去)(.{2,12}?)的?(\d+)天', message)
         if m:
-            params["origin"] = m.group(1).strip("，,。 ")
-            params["destination"] = m.group(2).strip("，,。 ")
+            params["origin"] = normalize_city_name(m.group(1))
+            params["destination"] = normalize_city_name(m.group(2))
             params["days"] = int(m.group(3))
         else:
             m = re.search(r'(?:到|去)(.{2,12}?)的?(\d+)天', message)
             if m:
-                params["destination"] = m.group(1).strip("，,。 ")
+                params["destination"] = normalize_city_name(m.group(1))
                 params["days"] = int(m.group(2))
 
         if "destination" not in params:
@@ -334,8 +380,8 @@ class TravelAgent:
 
     async def _collect_travel_data(self, params: dict) -> str:
         """主动编排工具调用，确保天气/景点/火车/航班数据都被查询"""
-        origin = params.get("origin", "")
-        dest = params.get("destination", "")
+        origin = normalize_city_name(params.get("origin", ""))
+        dest = normalize_city_name(params.get("destination", ""))
         date_str = params.get("date", "")
         tm = getattr(self, "_tool_map", {})
         if not tm:
@@ -382,9 +428,11 @@ class TravelAgent:
         # 1. 目的地天气
         dest_airport = get_airport_code(dest)
         if dest_airport:
-            await _call("getFutureWeatherByAirport",
-                        {"airport": dest_airport},
-                        f"目的地天气预报（{dest}）")
+            weather = await _call("getFutureWeatherByAirport",
+                                  {"airport": dest_airport},
+                                  f"目的地天气预报（{dest}）")
+            if weather is None and "maps_weather" in tm:
+                await _call("maps_weather", {"city": dest}, f"目的地天气预报（{dest}，高德）")
 
         # 2. 景点 / 餐厅 / 酒店（并行）
         if dest and "maps_text_search" in tm:
@@ -554,13 +602,20 @@ class TravelAgent:
                 content = self._stringify_content(getattr(resp, "content", ""))
                 return content if content else "抱歉，我无法生成回复。"
 
-        # 普通对话：走 ReAct Agent（可自主调工具）
+        direct_messages = self._build_direct_messages(message, history)
+        if not self._should_use_react(message, history):
+            print("[TravelAgent] 普通对话直连 LLM，跳过 ReAct Agent")
+            resp = await self._get_llm().ainvoke(direct_messages)
+            content = self._stringify_content(getattr(resp, "content", ""))
+            return content if content else "抱歉，我无法生成回复。"
+
+        # 旅行查询：走 ReAct Agent（可自主调工具）
         messages = self._build_messages(message, history)
         try:
             result = await self._invoke_with_retry(messages)
         except GraphRecursionError:
             print("[TravelAgent] 检测到 ReAct 递归超限，回退到直接回答模式")
-            fallback = await self._get_llm().ainvoke(messages)
+            fallback = await self._get_llm().ainvoke(direct_messages)
             content = self._stringify_content(getattr(fallback, "content", ""))
             return content if content else "抱歉，我无法生成回复。"
         for m in result["messages"]:
@@ -577,7 +632,7 @@ class TravelAgent:
         if ai_msgs:
             return self._stringify_content(ai_msgs[-1].content)
         print("[TravelAgent] ⚠️  未找到最终回答，尝试兜底生成...")
-        fallback = await self._get_llm().ainvoke(messages)
+        fallback = await self._get_llm().ainvoke(direct_messages)
         content = self._stringify_content(getattr(fallback, "content", ""))
         return content if content else "抱歉，我无法生成回复。"
 
@@ -600,6 +655,13 @@ class TravelAgent:
                 async for token in self._stream_llm_response(synthesis_messages):
                     yield token
                 return
+
+        direct_messages = self._build_direct_messages(message, history)
+        if not self._should_use_react(message, history):
+            print("[TravelAgent] 流式普通对话直连 LLM，跳过 ReAct Agent")
+            async for token in self._stream_llm_response(direct_messages):
+                yield token
+            return
 
         messages = self._build_messages_dict(message, history)
         
@@ -625,10 +687,10 @@ class TravelAgent:
                             yielded_any = True
                             yield text
         except GraphRecursionError:
-            print("[TravelAgent] 流式 ReAct 递归超限，回退到直接回答模式")
+            print("[TravelAgent] 流式 ReAct 递归超限")
             if not yielded_any:
-                fallback_messages = self._build_messages(message, history)
-                async for token in self._stream_llm_response(fallback_messages):
+                print("[TravelAgent] 流式回退到直接回答模式")
+                async for token in self._stream_llm_response(direct_messages):
                     yield token
                 return
             raise

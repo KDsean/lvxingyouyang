@@ -98,21 +98,42 @@ INSERT IGNORE INTO restaurant_specialties (restaurant_id, specialty) VALUES
 -- 商品数据初始化
 -- =============================================
 INSERT IGNORE INTO products (id, name, category, price, original_price, image, description, stock, sales, created_at) VALUES
-(1, '云南普洱茶饼 357g 古树纯料', 'food', 168.0, 268.0, 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800', '云南古树普洱茶，口感醇厚，越陈越香，收藏佳品。', 500, 2580, NOW()),
-(2, '景德镇手绘青花瓷茶具套装', 'craft', 299.0, 499.0, 'https://images.unsplash.com/photo-1563685860907-e6e0a4a0d31d?w=800', '景德镇传统工艺，手工绘制，一壶四杯，精美礼盒包装。', 200, 1520, NOW()),
-(3, '西藏牦牛肉干 500g', 'food', 88.0, NULL, 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=800', '高原特产，纯天然牦牛肉制作，营养丰富，口感劲道。', 800, 3200, NOW()),
-(4, '苏州丝绸真丝围巾', 'fashion', 158.0, 258.0, 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800', '100%桑蚕丝，苏州传统织造工艺，轻盈柔滑，多色可选。', 300, 980, NOW()),
-(5, '新疆和田大枣 500g', 'food', 68.0, NULL, 'https://images.unsplash.com/photo-1514593214839-8c2a0-5e3f?w=800', '新疆特产，颗粒饱满，香甜可口，天然无添加。', 1000, 5600, NOW()),
-(6, '四川麻辣火锅底料 500g', 'food', 38.0, NULL, 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=800', '正宗川味底料，麻辣鲜香，家庭装火锅必备。', 2000, 8900, NOW()),
-(7, '杭州西湖龙井茶 250g 明前', 'food', 288.0, NULL, 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800', '明前龙井，清香甘醇，色泽翠绿，茶中极品。', 150, 650, NOW()),
-(8, '北京稻香村糕点礼盒 1kg', 'food', 128.0, 168.0, 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800', '老字号百年品牌，京式糕点礼盒，传统手工制作。', 300, 1200, NOW()),
+(1, '云南普洱茶饼 357g 古树纯料', 'food', 168.0, 268.0, 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Yunnan_Sourcing_%22Golden_Pig%22_Raw_Pu-erh_Tea_Cake_-_inner_packaging_-_WikiTea.jpg', '云南古树普洱茶，口感醇厚，越陈越香，收藏佳品。', 500, 2580, NOW()),
+(2, '景德镇手绘青花瓷茶具套装', 'craft', 299.0, 499.0, 'https://upload.wikimedia.org/wikipedia/commons/6/69/Blue_and_white_jar_Jingdezhen_1271_1368.jpg', '景德镇传统工艺，手工绘制，一壶四杯，精美礼盒包装。', 200, 1520, NOW()),
+(3, '西藏牦牛肉干 500g', 'food', 88.0, NULL, 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Air-dried_ground_beef.jpg', '高原特产，纯天然牦牛肉制作，营养丰富，口感劲道。', 800, 3200, NOW()),
+(4, '苏州丝绸真丝围巾', 'fashion', 158.0, 258.0, 'https://upload.wikimedia.org/wikipedia/commons/c/c9/Silk_scarf.JPG', '100%桑蚕丝，苏州传统织造工艺，轻盈柔滑，多色可选。', 300, 980, NOW()),
+(5, '新疆和田大枣 500g', 'food', 68.0, NULL, 'https://upload.wikimedia.org/wikipedia/commons/2/28/Dried_jujube.jpg', '新疆特产，颗粒饱满，香甜可口，天然无添加。', 1000, 5600, NOW()),
+(6, '四川麻辣火锅底料 500g', 'food', 38.0, NULL, 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Chongqing.Original_Sichuan_hotpot_base.jpg', '正宗川味底料，麻辣鲜香，家庭装火锅必备。', 2000, 8900, NOW()),
+(7, '杭州西湖龙井茶 250g 明前', 'food', 288.0, NULL, 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Longjing_tea_leaves.jpg', '明前龙井，清香甘醇，色泽翠绿，茶中极品。', 150, 650, NOW()),
+(8, '北京稻香村糕点礼盒 1kg', 'food', 128.0, 168.0, 'https://upload.wikimedia.org/wikipedia/commons/b/b0/%E5%8C%97%E4%BA%AC%E7%A8%BB%E9%A6%99%E6%9D%91%E7%B3%95%E7%82%B9%E7%A4%BC%E7%9B%92.jpg', '老字号百年品牌，京式糕点礼盒，传统手工制作。', 300, 1200, NOW()),
 (9, '内蒙古奶酪条 250g', 'food', 45.0, NULL, 'https://images.unsplash.com/photo-1452195100486-9cc805987862?w=800', '纯正奶香，内蒙古牧区出产，营养健康零食。', 600, 3400, NOW()),
-(10, '西安兵马俑陶瓷摆件 小号', 'craft', 89.0, 120.0, 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800', '仿古工艺品，高仿真陶瓷兵马俑，历史文化纪念品。', 400, 760, NOW()),
-(11, '贵州茅台镇酱香白酒 500ml', 'food', 199.0, 299.0, 'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=800', '酱香浓郁，回味悠长，纯粮酿造，收藏佳品。', 500, 2100, NOW()),
-(12, '苗族手工刺绣挎包', 'craft', 268.0, NULL, 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800', '苗族传统手工刺绣，纯手工制作，色彩鲜艳，独一无二。', 80, 320, NOW()),
-(13, '广西螺蛳粉 300g*5包', 'food', 58.0, 78.0, 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=800', '正宗柳州螺蛳粉，酸辣鲜香，网红美食，速食方便。', 3000, 15600, NOW()),
-(14, '云南鲜花饼礼盒 12枚', 'food', 78.0, 98.0, 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800', '玫瑰花馅，酥皮饼，云南特产，花香怡人，精美礼盒。', 800, 4200, NOW()),
-(15, '景泰蓝珐琅彩手镯', 'craft', 388.0, 580.0, 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800', '北京传统工艺，手工珐琅彩，精美大气，送礼佳品。', 60, 180, NOW());
+(10, '西安兵马俑陶瓷摆件 小号', 'craft', 89.0, 120.0, 'https://upload.wikimedia.org/wikipedia/commons/1/1f/General_Terracotta_Warrior.jpg', '仿古工艺品，高仿真陶瓷兵马俑，历史文化纪念品。', 400, 760, NOW()),
+(11, '贵州茅台镇酱香白酒 500ml', 'food', 199.0, 299.0, 'https://upload.wikimedia.org/wikipedia/commons/1/15/Baijiu_in_Haikou_2018_09_11.jpg', '酱香浓郁，回味悠长，纯粮酿造，收藏佳品。', 500, 2100, NOW()),
+(12, '苗族手工刺绣挎包', 'craft', 268.0, NULL, 'https://upload.wikimedia.org/wikipedia/commons/5/5b/Miao_embroidery_-_Yunnan_Provincial_Museum-_DSC02190.JPG', '苗族传统手工刺绣，纯手工制作，色彩鲜艳，独一无二。', 80, 320, NOW()),
+(13, '广西螺蛳粉 300g*5包', 'food', 58.0, 78.0, 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Luosifen.jpg', '正宗柳州螺蛳粉，酸辣鲜香，网红美食，速食方便。', 3000, 15600, NOW()),
+(14, '云南鲜花饼礼盒 12枚', 'food', 78.0, 98.0, 'https://upload.wikimedia.org/wikipedia/commons/c/cb/%E4%BA%91%E5%8D%97%E7%8E%AB%E7%91%B0%E9%B2%9C%E8%8A%B1%E9%A5%BC-2164122.jpg', '玫瑰花馅，酥皮饼，云南特产，花香怡人，精美礼盒。', 800, 4200, NOW()),
+(15, '景泰蓝珐琅彩手镯', 'craft', 388.0, 580.0, 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Cloisonne_Enamel.jpg', '北京传统工艺，手工珐琅彩，精美大气，送礼佳品。', 60, 180, NOW());
+
+UPDATE products
+SET image = CASE id
+    WHEN 1 THEN 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Yunnan_Sourcing_%22Golden_Pig%22_Raw_Pu-erh_Tea_Cake_-_inner_packaging_-_WikiTea.jpg'
+    WHEN 2 THEN 'https://upload.wikimedia.org/wikipedia/commons/6/69/Blue_and_white_jar_Jingdezhen_1271_1368.jpg'
+    WHEN 3 THEN 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Air-dried_ground_beef.jpg'
+    WHEN 4 THEN 'https://upload.wikimedia.org/wikipedia/commons/c/c9/Silk_scarf.JPG'
+    WHEN 5 THEN 'https://upload.wikimedia.org/wikipedia/commons/2/28/Dried_jujube.jpg'
+    WHEN 6 THEN 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Chongqing.Original_Sichuan_hotpot_base.jpg'
+    WHEN 7 THEN 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Longjing_tea_leaves.jpg'
+    WHEN 8 THEN 'https://upload.wikimedia.org/wikipedia/commons/b/b0/%E5%8C%97%E4%BA%AC%E7%A8%BB%E9%A6%99%E6%9D%91%E7%B3%95%E7%82%B9%E7%A4%BC%E7%9B%92.jpg'
+    WHEN 9 THEN 'https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=1000&q=80'
+    WHEN 10 THEN 'https://upload.wikimedia.org/wikipedia/commons/1/1f/General_Terracotta_Warrior.jpg'
+    WHEN 11 THEN 'https://upload.wikimedia.org/wikipedia/commons/1/15/Baijiu_in_Haikou_2018_09_11.jpg'
+    WHEN 12 THEN 'https://upload.wikimedia.org/wikipedia/commons/5/5b/Miao_embroidery_-_Yunnan_Provincial_Museum-_DSC02190.JPG'
+    WHEN 13 THEN 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Luosifen.jpg'
+    WHEN 14 THEN 'https://upload.wikimedia.org/wikipedia/commons/c/cb/%E4%BA%91%E5%8D%97%E7%8E%AB%E7%91%B0%E9%B2%9C%E8%8A%B1%E9%A5%BC-2164122.jpg'
+    WHEN 15 THEN 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Cloisonne_Enamel.jpg'
+    ELSE image
+END
+WHERE id BETWEEN 1 AND 15;
 
 -- 商品标签
 INSERT IGNORE INTO product_tags (product_id, tag) VALUES

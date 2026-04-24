@@ -79,11 +79,11 @@
         :key="car.id"
         class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition"
       >
-        <div class="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200">
+        <div class="relative h-48 overflow-hidden bg-gray-100">
           <img
-            :src="car.image"
+            :src="getCarImage(car)"
             :alt="car.model"
-            class="w-full h-full object-contain p-4"
+            class="w-full h-full object-cover"
           />
           <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
             {{ getCarTypeName(car.type) }}
@@ -135,6 +135,7 @@ import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { searchCars } from '@/api/modules/car'
 import type { CarRental } from '@/types'
+import { getCarImage } from '@/utils/businessImages'
 
 const router = useRouter()
 
@@ -158,7 +159,7 @@ const cars = ref<CarRental[]>([
     seats: 5,
     transmission: 'auto',
     pricePerDay: 150,
-    image: 'https://modao.cc/agent/placeholder.svg',
+    image: 'https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/c/ce/2018_SAIC-Volkswagen_Lavida_%28front%29.jpg&w=1000&h=650&fit=cover&output=jpg',
     features: ['蓝牙', 'USB充电', '倒车影像'],
     location: '北京'
   },
@@ -170,7 +171,7 @@ const cars = ref<CarRental[]>([
     seats: 5,
     transmission: 'auto',
     pricePerDay: 280,
-    image: 'https://modao.cc/agent/placeholder.svg',
+    image: 'https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/4/4d/Honda_CR-V_%286th_generation%29_hybrid_1X7A0866.jpg&w=1000&h=650&fit=cover&output=jpg',
     features: ['全景天窗', '座椅加热', '自动泊车', '车载导航'],
     location: '上海'
   },
@@ -182,7 +183,7 @@ const cars = ref<CarRental[]>([
     seats: 5,
     transmission: 'auto',
     pricePerDay: 220,
-    image: 'https://modao.cc/agent/placeholder.svg',
+    image: 'https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/3/38/TOYOTA_CAMRY_%28XV70%29_China_%284%29.jpg&w=1000&h=650&fit=cover&output=jpg',
     features: ['真皮座椅', '定速巡航', '倒车雷达'],
     location: '广州'
   },
@@ -194,7 +195,7 @@ const cars = ref<CarRental[]>([
     seats: 5,
     transmission: 'auto',
     pricePerDay: 680,
-    image: 'https://modao.cc/agent/placeholder.svg',
+    image: 'https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/0/06/MERCEDES-BENZ_E-CLASS_%28W213%29_China.jpg&w=1000&h=650&fit=cover&output=jpg',
     features: ['全景天窗', '座椅按摩', '柏林之声', '自动驾驶辅助'],
     location: '深圳'
   },
@@ -206,7 +207,7 @@ const cars = ref<CarRental[]>([
     seats: 7,
     transmission: 'auto',
     pricePerDay: 380,
-    image: 'https://modao.cc/agent/placeholder.svg',
+    image: 'https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/4/44/BUICK_GL8_CENTURY_%28BUICK_GL8_FOURTH_GENENRATION%29_China.jpg&w=1000&h=650&fit=cover&output=jpg',
     features: ['7座商务', '电动侧滑门', '后排娱乐'],
     location: '成都'
   },
@@ -218,7 +219,7 @@ const cars = ref<CarRental[]>([
     seats: 5,
     transmission: 'auto',
     pricePerDay: 450,
-    image: 'https://modao.cc/agent/placeholder.svg',
+    image: 'https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/97/Tesla_Model_3%2C_EMS_2024%2C_Essen_%28P1032260%29.jpg&w=1000&h=650&fit=cover&output=jpg',
     features: ['纯电动', '自动驾驶', '超大屏幕', '超级充电'],
     location: '杭州'
   }

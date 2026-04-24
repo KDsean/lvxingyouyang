@@ -68,6 +68,18 @@ export interface Destination {
   popularityScore: number
   tags: string[]
   bestSeason: string[]
+  heatCount?: number
+  heatRank?: number
+}
+
+export interface DestinationHeatmapPoint {
+  id: string
+  destination: string
+  country: string
+  count: number
+  lat: number
+  lng: number
+  score: number
 }
 
 // 机票类型

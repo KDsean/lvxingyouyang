@@ -9,7 +9,7 @@
       <!-- 酒店图片 -->
       <div class="relative h-96">
         <img
-          src="https://modao.cc/agent/placeholder.svg"
+          :src="hotelHeroImage"
           alt="Hotel"
           class="w-full h-full object-cover"
         />
@@ -72,8 +72,10 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { getHotelImage } from '@/utils/businessImages'
 
 const router = useRouter()
+const hotelHeroImage = getHotelImage({ name: '三亚天际海景度假酒店', city: '三亚', location: '海棠湾' })
 
 const facilities = [
   '免费WiFi', '游泳池', '健身房', '餐厅', '停车场', 'SPA',

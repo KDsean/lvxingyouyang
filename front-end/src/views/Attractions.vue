@@ -46,7 +46,7 @@
         >
           <div class="relative h-56 overflow-hidden">
             <img
-              :src="attraction.images[0]"
+              :src="getAttractionImage(attraction)"
               :alt="attraction.name"
               class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
             />
@@ -108,7 +108,7 @@
         >
           <div class="w-48 h-48 relative overflow-hidden flex-shrink-0">
             <img
-              :src="attraction.images[0]"
+              :src="getAttractionImage(attraction)"
               :alt="attraction.name"
               class="w-full h-full object-cover hover:scale-110 transition duration-500"
             />
@@ -147,6 +147,7 @@ import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import type { Attraction } from '@/types'
 import { searchAttractions } from '@/api/modules/attraction'
+import { getAttractionImage } from '@/utils/businessImages'
 
 const router = useRouter()
 

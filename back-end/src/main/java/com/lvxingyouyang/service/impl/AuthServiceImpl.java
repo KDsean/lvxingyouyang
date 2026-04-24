@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * 认证服务实现类
@@ -104,6 +105,24 @@ public class AuthServiceImpl implements IAuthService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("用户不存在"));
 
+        if (userDTO.getUsername() != null && !userDTO.getUsername().isBlank()
+                && !Objects.equals(user.getUsername(), userDTO.getUsername())) {
+            userRepository.findByUsername(userDTO.getUsername())
+                    .filter(existingUser -> !Objects.equals(existingUser.getId(), userId))
+                    .ifPresent(existingUser -> {
+                        throw new RuntimeException("用户名已存在");
+                    });
+            user.setUsername(userDTO.getUsername());
+        }
+        if (userDTO.getEmail() != null && !userDTO.getEmail().isBlank()
+                && !Objects.equals(user.getEmail(), userDTO.getEmail())) {
+            userRepository.findByEmail(userDTO.getEmail())
+                    .filter(existingUser -> !Objects.equals(existingUser.getId(), userId))
+                    .ifPresent(existingUser -> {
+                        throw new RuntimeException("邮箱已存在");
+                    });
+            user.setEmail(userDTO.getEmail());
+        }
         if (userDTO.getPhone() != null) {
             user.setPhone(userDTO.getPhone());
         }

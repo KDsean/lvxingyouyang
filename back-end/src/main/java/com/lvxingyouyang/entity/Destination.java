@@ -44,6 +44,12 @@ public class Destination {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Transient
+    private Integer heatCount;
+
+    @Transient
+    private Integer heatRank;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

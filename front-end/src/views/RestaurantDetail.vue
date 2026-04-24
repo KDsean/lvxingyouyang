@@ -8,7 +8,7 @@
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
       <div class="relative h-96">
         <img
-          src="https://modao.cc/agent/placeholder.svg"
+          :src="restaurantHeroImage"
           alt="Restaurant"
           class="w-full h-full object-cover"
         />
@@ -78,8 +78,10 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { getRestaurantImage } from '@/utils/businessImages'
 
 const router = useRouter()
+const restaurantHeroImage = getRestaurantImage({ name: '大董烤鸭店', city: '北京', cuisine: '京菜', specialties: ['烤鸭'] })
 
 const goBack = () => {
   router.back()

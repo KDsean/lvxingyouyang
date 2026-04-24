@@ -78,7 +78,7 @@
       >
         <div class="md:w-80 h-64 md:h-auto relative overflow-hidden">
           <img
-            :src="hotel.images[0]"
+            :src="getHotelImage(hotel)"
             :alt="hotel.name"
             class="w-full h-full object-cover hover:scale-110 transition duration-500"
           />
@@ -147,11 +147,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { searchHotels } from '@/api/modules/hotel'
 import type { Hotel } from '@/types'
+import { getHotelImage } from '@/utils/businessImages'
 
 const router = useRouter()
 
@@ -177,7 +178,7 @@ const hotels = ref<Hotel[]>([
     rating: 4.9,
     reviewCount: 2400,
     price: 1899,
-    images: ['https://modao.cc/agent/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'],
     description: '独拥两公里私人沙滩，2026年全新装修，配备AI全屋智能控制系统，让您的海滨度假充满科技感与舒适度。',
     facilities: ['免费WiFi', '游泳池', '健身房', '餐厅', '停车场', 'SPA'],
     starLevel: 5,
@@ -207,7 +208,7 @@ const hotels = ref<Hotel[]>([
     rating: 4.7,
     reviewCount: 1800,
     price: 680,
-    images: ['https://modao.cc/agent/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80'],
     description: '坐落于丽江古城核心区域，纳西族传统建筑风格，每间房都能看到玉龙雪山，体验原汁原味的古城生活。',
     facilities: ['免费WiFi', '茶室', '庭院', '早餐', '行李寄存'],
     starLevel: 4,

@@ -46,7 +46,7 @@
         >
           <div class="relative aspect-square overflow-hidden">
             <img
-              :src="product.image"
+              :src="getProductImage(product)"
               :alt="product.name"
               class="w-full h-full object-cover hover:scale-110 transition duration-500"
             />
@@ -91,7 +91,7 @@
         >
           <div class="relative aspect-square overflow-hidden cursor-pointer" @click="viewDetail(product.id)">
             <img
-              :src="product.image"
+              :src="getProductImage(product)"
               :alt="product.name"
               class="w-full h-full object-cover hover:scale-110 transition duration-500"
             />
@@ -148,6 +148,7 @@ import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { getProducts } from '@/api/modules/shopping'
 import type { Product } from '@/types'
+import { getProductImage } from '@/utils/businessImages'
 
 const router = useRouter()
 
